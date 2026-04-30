@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DNA } from "react-loader-spinner";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -17,7 +18,18 @@ function UsersList() {
   return (
     <ul>
       {error && <div> ERROR !!!!</div>}
-      {isFetching && <div> Data ioading ....Please wait</div>}
+      {isFetching && (
+        <div>
+          <DNA
+            visible={true}
+            height="80"
+            width="100"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+        </div>
+      )}
       {!error &&
         !isFetching &&
         users.map((u) => (
