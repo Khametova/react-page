@@ -7,14 +7,14 @@ function UsersList() {
   const [users, setUsers] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(3);
   const [results, setResults] = useState(10);
 
   useEffect(() => {
     setIsFetching(true);
     setError(null);
     fetch(
-      "https://randomuser.me/api/?page=${currentPage}&results=${results}&seed=pe2024",
+      `https://randomuser.me/api/?page=${currentPage}&results=${results}&seed=pe2024`,
     )
       .then((response) => response.json())
       .then(({ results }) => setUsers(results))
