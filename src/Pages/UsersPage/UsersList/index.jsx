@@ -14,7 +14,7 @@ function UsersList() {
   useEffect(() => {
     setIsFetching(true);
     setError(null);
-    loadUsers({ currentPage, results })
+    loadUsers({ page: currentPage, results })
       .then(({ results }) => setUsers(results))
       .catch((e) => setError(e))
       .finally(() => setIsFetching(false));
