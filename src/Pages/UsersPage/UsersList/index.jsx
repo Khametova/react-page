@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
 import { FcNext } from "react-icons/fc";
 import { FcPrevious } from "react-icons/fc";
+import { loadUsers } from "../../../api";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -13,10 +14,7 @@ function UsersList() {
   useEffect(() => {
     setIsFetching(true);
     setError(null);
-    fetch(
-      `https://randomuser.me/api/?page=${currentPage}&results=${results}&seed=pe2024`,
-    )
-      .then((response) => response.json())
+    loadUsers({ currentPage, results })
       .then(({ results }) => setUsers(results))
       .catch((e) => setError(e))
       .finally(() => setIsFetching(false));
@@ -61,7 +59,7 @@ function UsersList() {
           ))}
       </ul>
       <div>
-        <button onClick={goPrevPage}>
+        <button onClick={goPrevPage} disabled={currentPage === 1}>
           <FcPrevious />
         </button>
         <button onClick={goNextPage}>
