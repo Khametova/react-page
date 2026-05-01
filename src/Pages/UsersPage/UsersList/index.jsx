@@ -8,8 +8,19 @@ function UsersList() {
   const [users, setUsers] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
   const [results, setResults] = useState(10);
+
+  useEffect(() => {
+    const savedPage = Number(window.localStorage.getItem(`page`));
+    if (savedPage) {
+      setCurrentPage(savedPage);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(`page`, currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     setIsFetching(true);
@@ -62,6 +73,7 @@ function UsersList() {
         <button onClick={goPrevPage} disabled={currentPage === 1}>
           <FcPrevious />
         </button>
+        <span>{currentPage}</span>
         <button onClick={goNextPage}>
           <FcNext />
         </button>
