@@ -1,5 +1,7 @@
 import queryString from "query-string";
 
+const BASE_URL = `https://randomuser.me/api/`;
+
 export const loadUsers = (options) => {
   const defaultOptions = {
     page: 1,
@@ -13,7 +15,7 @@ export const loadUsers = (options) => {
   };
   const { currentPage, results } = resultsOptions;
 
-  return fetch(
-    `https://randomuser.me/api/?${queryString.stringify(resultsOptions)}`,
-  ).then((response) => response.json());
+  return fetch(`${BASE_URL}?${queryString.stringify(resultsOptions)}`).then(
+    (response) => response.json(),
+  );
 };
