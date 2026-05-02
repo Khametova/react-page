@@ -1,6 +1,6 @@
 import FilterPanel from "./FilterPanel";
 import UsersList from "./UsersList";
-import styles from "./UsersPage.module.css";
+import styles from "./UsersPage.module.sass";
 
 function UsersPage() {
   return (
