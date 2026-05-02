@@ -10,6 +10,7 @@ function UsersList() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [results, setResults] = useState(10);
+  const [gender, setGender] = useState("male");
 
   useEffect(() => {
     const savedPage = Number(window.localStorage.getItem(`page`));
@@ -25,11 +26,11 @@ function UsersList() {
   useEffect(() => {
     setIsFetching(true);
     setError(null);
-    loadUsers({ page: currentPage, results })
+    loadUsers({ page: currentPage, results, gender })
       .then(({ results }) => setUsers(results))
       .catch((e) => setError(e))
       .finally(() => setIsFetching(false));
-  }, [currentPage]);
+  }, [currentPage, gender]);
 
   const goPrevPage = () => {
     if (currentPage > 1) {
@@ -41,8 +42,31 @@ function UsersList() {
     setCurrentPage((page) => page + 1);
   };
 
+  const changeGender = ({ target: { value } }) => setGender(value);
+
   return (
     <>
+      <label>
+        <input
+          type="radio"
+          value="male"
+          checked={gender === "male"}
+          name="gender"
+          onChange={changeGender}
+        />
+        MALE
+      </label>
+      <label>
+        <input
+          type="radio"
+          value="female"
+          checked={gender === "female"}
+          name="gender"
+          onChange={changeGender}
+        />
+        FEMALE
+      </label>
+
       <ul>
         {error && <div> ERROR !!!!</div>}
         {isFetching && (

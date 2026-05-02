@@ -6,7 +6,7 @@ export const loadUsers = (options) => {
   const defaultOptions = {
     page: 1,
     results: 10,
-    seed: `pe2024`,
+    //seed: `pe2024`,
   };
 
   const resultsOptions = {
