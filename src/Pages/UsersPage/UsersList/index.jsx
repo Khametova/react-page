@@ -4,13 +4,12 @@ import { FcNext } from "react-icons/fc";
 import { FcPrevious } from "react-icons/fc";
 import { loadUsers } from "../../../api";
 
-function UsersList() {
+function UsersList({ gender, isPhoneVisible }) {
   const [users, setUsers] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [results, setResults] = useState(10);
-  const [gender, setGender] = useState("male");
 
   useEffect(() => {
     const savedPage = Number(window.localStorage.getItem(`page`));
@@ -42,31 +41,8 @@ function UsersList() {
     setCurrentPage((page) => page + 1);
   };
 
-  const changeGender = ({ target: { value } }) => setGender(value);
-
   return (
     <>
-      <label>
-        <input
-          type="radio"
-          value="male"
-          checked={gender === "male"}
-          name="gender"
-          onChange={changeGender}
-        />
-        MALE
-      </label>
-      <label>
-        <input
-          type="radio"
-          value="female"
-          checked={gender === "female"}
-          name="gender"
-          onChange={changeGender}
-        />
-        FEMALE
-      </label>
-
       <ul>
         {error && <div> ERROR !!!!</div>}
         {isFetching && (
@@ -92,6 +68,7 @@ function UsersList() {
               <p>
                 {u.name.first} {u.name.last}
               </p>
+              {isPhoneVisible && <p>phone:{u.phone}</p>}
             </li>
           ))}
       </ul>
