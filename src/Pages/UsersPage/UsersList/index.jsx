@@ -85,11 +85,13 @@ function UsersList() {
           !isFetching &&
           users.map((u) => (
             <li key={u.login.uuid}>
-              {Object.keys(u).map((key) => (
-                <p key={key}>
-                  {key}: {JSON.stringify(u[key])}
-                </p>
-              ))}
+              <img
+                src={u.picture.thumbnail}
+                alt={u.name.first + " " + u.name.last}
+              />
+              <p>
+                {u.name.first} {u.name.last}
+              </p>
             </li>
           ))}
       </ul>
